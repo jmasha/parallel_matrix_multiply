@@ -14,7 +14,7 @@ long **N;
 long **M;
 long **C;
 
-FILE* F;
+FILE* f;
 
 static long **init_array() {
 	long **M;

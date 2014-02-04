@@ -10,19 +10,19 @@ int main (int argc, char** argv) {
 	
 	sprintf(fname,"MM_PAR.%dP.%d.txt",NUM_THREADS,ARRAY_SIZE);
 
-	F = fopen(fname,"w+");
+	f = fopen(fname,"w+");
 
 	/*The number of threads */
-	fprintf(F,"Number of threads = %d\n",NUM_THREADS);
+	fprintf(f,"Number of threads = %d\n",NUM_THREADS);
 	/*The number of data points for each experiment */
 	for(j=0; j<NUM_DATA_POINTS; j++) {
-		fprintf(F,"Array size = %d\n",ARRAY_SIZE);
+		fprintf(f,"Array size = %d\n",ARRAY_SIZE);
 		CHUNK_SIZE = ARRAY_SIZE/NUM_THREADS;
-		fprintf(F,"Chunk size = %d\n",CHUNK_SIZE);
+		fprintf(f,"Chunk size = %d\n",CHUNK_SIZE);
 		
 		/* The inner loop to average for each data point */
 		for(k=0;k<NUM_TRIALS; k++) {
-			fprintf(F,"Trial = %d\n",k);
+			fprintf(f,"Trial = %d\n",k);
 
 			N = init_array();
 			M = init_array();
@@ -43,7 +43,7 @@ int main (int argc, char** argv) {
 		}
 		ARRAY_SIZE += ARRAY_SIZE;
 	}
-	fclose(F);
+	fclose(f);
 	pthread_exit(NULL);
 	return 0;
 }
@@ -140,7 +140,7 @@ void * multiply(void * arg) {
 	t1 = time(NULL);
 	c1 = clock();
 	MASTER {
-		fprintf (F,"Elapsed wall clock time: %lds\n", (long) (t1 - t0));
-		fprintf (F,"Elapsed CPU time: %f\n", (float) (c1 - c0)/CLOCKS_PER_SEC);
+		fprintf (f,"Elapsed wall clock time: %lds\n", (long) (t1 - t0));
+		fprintf (f,"Elapsed CPU time: %f\n", (float) (c1 - c0)/CLOCKS_PER_SEC);
 	}
 }
